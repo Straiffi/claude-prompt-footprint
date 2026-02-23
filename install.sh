@@ -25,11 +25,11 @@ if [ ! -f ~/.claude/settings.json ]; then
     echo '{}' > ~/.claude/settings.json
 fi
 jq --arg cmd "$DIR/scripts/statusline.sh" \
-    '.statusLine = {"type": "command", "command": $cmd}' \
+    '.statusLine = {"type": "command", "command": $cmd}
+     | .enabledPlugins["environmental-tracker@local-environmental-tracker"] = true' \
     ~/.claude/settings.json > /tmp/claude-settings.tmp \
     && mv /tmp/claude-settings.tmp ~/.claude/settings.json
 echo "  ~/.claude/settings.json updated"
 
 echo ""
-echo "Done. In Claude Code, run:"
-echo "  /plugin install $DIR"
+echo "Done. Restart Claude Code for changes to take effect."
