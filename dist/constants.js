@@ -11,8 +11,6 @@ export const EMISSION_FACTORS = {
     // Water usage for datacenter cooling (L per kWh)
     // Source: Google Cloud sustainability reports
     waterPerKWh: 1.8,
-    // Reasoning multiplier for hidden tokens
-    reasoningTokenMultiplier: 3.0
 };
 export const getEmissionFactors = () => {
     const { electricityPerToken, co2PerKWh, waterPerKWh } = EMISSION_FACTORS;

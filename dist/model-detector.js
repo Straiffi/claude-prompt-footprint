@@ -8,6 +8,9 @@ export const detectModelType = (modelName) => {
     // Claude with thinking = reasoning
     if (name.includes('claude') && name.includes('thinking'))
         return 'reasoning';
+    // Claude Sonnet 4.6 always uses extended thinking in Claude Code
+    if (name.includes('sonnet-4-6'))
+        return 'reasoning';
     // Claude Sonnet/Haiku = non-reasoning
     if (name.includes('claude'))
         return 'non-reasoning';

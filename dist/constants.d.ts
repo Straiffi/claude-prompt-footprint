@@ -5,7 +5,6 @@ export declare const EMISSION_FACTORS: {
     };
     co2PerKWh: number;
     waterPerKWh: number;
-    reasoningTokenMultiplier: number;
 };
 export declare const getEmissionFactors: () => {
     electricity: {
