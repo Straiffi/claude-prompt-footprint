@@ -1,4 +1,4 @@
-export type ModelType = 'reasoning' | 'non-reasoning' | 'unknown';
+export type ModelType = 'reasoning' | 'light-reasoning' | 'non-reasoning' | 'unknown';
 
 export type SessionData = {
   model: string;

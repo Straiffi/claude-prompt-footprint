@@ -10,7 +10,7 @@ export const detectModelType = (modelName) => {
         return 'reasoning';
     // Claude Sonnet 4.6 always uses extended thinking in Claude Code
     if (name.includes('sonnet-4-6'))
-        return 'reasoning';
+        return 'light-reasoning';
     // Claude Sonnet/Haiku = non-reasoning
     if (name.includes('claude'))
         return 'non-reasoning';

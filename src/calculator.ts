@@ -7,7 +7,7 @@ export const calculateImpact = (
   modelType: ModelType
 ): EnvironmentalImpact => {
   const factors = getEmissionFactors();
-  const type = modelType === 'reasoning' ? 'reasoning' : 'nonReasoning';
+  const type = modelType === 'reasoning' ? 'reasoning' : modelType === 'light-reasoning' ? 'lightReasoning' : 'nonReasoning';
 
   const totalTokens = promptTokens + completionTokens;
   

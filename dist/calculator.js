@@ -1,7 +1,7 @@
 import { getEmissionFactors } from './constants.js';
 export const calculateImpact = (promptTokens, completionTokens, modelType) => {
     const factors = getEmissionFactors();
-    const type = modelType === 'reasoning' ? 'reasoning' : 'nonReasoning';
+    const type = modelType === 'reasoning' ? 'reasoning' : modelType === 'light-reasoning' ? 'lightReasoning' : 'nonReasoning';
     const totalTokens = promptTokens + completionTokens;
     return {
         electricity: totalTokens * factors.electricity[type],

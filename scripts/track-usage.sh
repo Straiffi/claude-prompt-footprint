@@ -17,8 +17,13 @@ MODEL=$(echo "$INPUT" | jq -r '.model // "unknown"')
 if [ -f "$TRANSCRIPT_PATH" ] && [ -s "$TRANSCRIPT_PATH" ]; then
     # Find the last assistant entry with usage data
     LAST_ENTRY=$(grep '"role":"assistant"' "$TRANSCRIPT_PATH" | tail -n 1)
-    # Usage is at .message.usage; sum non-cached + cache_creation tokens (cache reads are negligible)
-    INPUT_TOKENS=$(echo "$LAST_ENTRY" | jq -r '(.message.usage.input_tokens // 0) + (.message.usage.cache_creation_input_tokens // 0)')
+    # Usage is at .message.usage; sum non-cached + cache_creation tokens + 10% of cache reads
+    # (cache reads consume real compute at ~10% of full recomputation cost)
+    INPUT_TOKENS=$(echo "$LAST_ENTRY" | jq -r '
+      (.message.usage.input_tokens // 0) +
+      (.message.usage.cache_creation_input_tokens // 0) +
+      ((.message.usage.cache_read_input_tokens // 0) * 0.1)
+      | round')
     OUTPUT_TOKENS=$(echo "$LAST_ENTRY" | jq -r '.message.usage.output_tokens // 0')
 
     # If model is unknown in hook, try to get it from transcript

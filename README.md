@@ -12,9 +12,11 @@ Tracks CO₂ emissions, electricity consumption, and water usage for cooling —
 
 After each prompt, a [Stop hook](https://docs.anthropic.com/en/docs/claude-code/hooks) reads the session transcript, extracts token counts, and calculates environmental impact using published emission factors:
 
-- **Electricity:** ~10mWh per token (standard models), ~30mWh (Opus/reasoning)
+- **Electricity:** ~10mWh per token (standard models), ~20mWh (Sonnet with extended thinking), ~30mWh (Opus)
 - **CO₂:** 0.5 kg per kWh (IEA global grid average)
 - **Water:** 1.8L per kWh (datacenter cooling, Google Cloud figures)
+
+> **Note on accuracy:** AI labs do not publish per-token energy figures. All values are estimates derived from third-party research (EcoLogits, academic papers) and should be treated as order-of-magnitude signals, not precise measurements. Actual consumption varies by datacenter, hardware generation, and inference optimisations that are not publicly disclosed.
 
 The results are written to `/tmp/claude-env-tracker-<session>.json` and copied to `/tmp/claude-env-tracker-latest.json`. The status line command reads this file and formats it for display.
 
@@ -68,7 +70,10 @@ install.sh            # One-time setup script
 
 | Factor | Value | Source |
 |---|---|---|
-| Electricity (standard) | 10 mWh/token | EcoLogits |
-| Electricity (reasoning) | 30 mWh/token | 3× multiplier for hidden reasoning tokens |
+| Electricity (standard) | 10 mWh/token | EcoLogits — standard inference |
+| Electricity (light reasoning) | 20 mWh/token | Estimate for smaller models with extended thinking (e.g. Sonnet 4.6) |
+| Electricity (reasoning) | 30 mWh/token | Estimate for large reasoning models (e.g. Opus) |
 | Carbon intensity | 0.5 kg CO₂/kWh | IEA Global Energy Review 2024 |
 | Water usage | 1.8 L/kWh | Google Cloud sustainability reports |
+
+All figures are estimates. AI providers do not publish per-token energy data.

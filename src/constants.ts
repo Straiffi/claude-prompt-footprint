@@ -2,8 +2,9 @@
 export const EMISSION_FACTORS = {
   // Electricity consumption per token (Wh/token)
   electricityPerToken: {
-    nonReasoning: 0.01,  // ~10mWh per token for standard inference
-    reasoning: 0.03      // ~30mWh per token (3x for reasoning models)
+    nonReasoning: 0.01,    // ~10mWh per token for standard inference
+    lightReasoning: 0.02,  // ~20mWh per token for smaller models with extended thinking (e.g. Sonnet 4.6)
+    reasoning: 0.03        // ~30mWh per token for large reasoning models (e.g. Opus)
   },
   
   // Grid carbon intensity (kg CO2 per kWh) - global average
@@ -23,10 +24,12 @@ export const getEmissionFactors = () => {
     electricity: electricityPerToken,
     co2: {
       nonReasoning: (electricityPerToken.nonReasoning / 1000) * co2PerKWh * 1000,
+      lightReasoning: (electricityPerToken.lightReasoning / 1000) * co2PerKWh * 1000,
       reasoning: (electricityPerToken.reasoning / 1000) * co2PerKWh * 1000
     },
     water: {
       nonReasoning: (electricityPerToken.nonReasoning / 1000) * waterPerKWh,
+      lightReasoning: (electricityPerToken.lightReasoning / 1000) * waterPerKWh,
       reasoning: (electricityPerToken.reasoning / 1000) * waterPerKWh
     }
   };
