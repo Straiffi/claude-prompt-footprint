@@ -6,7 +6,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/home/juuso/code/claude-prompt-footprint/scripts/track-usage.sh",
+            "command": "__DIR__/scripts/track-usage.sh",
             "async": true
           }
         ]

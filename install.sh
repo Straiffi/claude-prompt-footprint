@@ -9,16 +9,9 @@ PLUGINS_DIR="$HOME/.claude/plugins"
 
 echo "Installing claude-prompt-footprint from: $DIR"
 
-# Patch hooks/hooks.json with the actual clone path.
-# Replaces whatever path currently precedes /scripts/track-usage.sh.
-if [[ "$OSTYPE" == "darwin"* ]]; then
-    sed -i '' "s|\"command\": \".*scripts/track-usage.sh\"|\"command\": \"$DIR/scripts/track-usage.sh\"|" \
-        "$DIR/hooks/hooks.json"
-else
-    sed -i "s|\"command\": \".*scripts/track-usage.sh\"|\"command\": \"$DIR/scripts/track-usage.sh\"|" \
-        "$DIR/hooks/hooks.json"
-fi
-echo "  hooks/hooks.json patched"
+# Generate hooks/hooks.json from template, substituting the actual clone path.
+sed "s|__DIR__|$DIR|g" "$DIR/hooks/hooks.json.template" > "$DIR/hooks/hooks.json"
+echo "  hooks/hooks.json generated from template"
 
 # Register the local marketplace so Claude Code can resolve the plugin.
 mkdir -p "$PLUGINS_DIR"
