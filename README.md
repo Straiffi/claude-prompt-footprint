@@ -47,6 +47,10 @@ After installing the plugin, restart Claude Code. The status line will appear af
 
 > **Note:** `hooks/hooks.json` is modified in place by `install.sh`. Don't commit this change — the patched path is machine-specific.
 
+## Uninstalling
+
+Remove the plugin via `/plugin remove`, then manually delete the `statusLine` entry from `~/.claude/settings.json` — the plugin system does not remove it automatically.
+
 ## Project structure
 
 ```
