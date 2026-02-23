@@ -33,12 +33,6 @@ cd ~/claude-prompt-footprint
 bash install.sh
 ```
 
-Then in Claude Code:
-
-```
-/plugin install ~/claude-prompt-footprint
-```
-
 `install.sh` does two things:
 1. Generates `hooks/hooks.json` from `hooks/hooks.json.template` with the actual clone path (the hook command must be an absolute path)
 2. Adds the `statusLine` command to `~/.claude/settings.json`
