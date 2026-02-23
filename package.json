@@ -1,0 +1,19 @@
+{
+  "name": "claude-environmental-tracker",
+  "version": "1.0.0",
+  "description": "Track environmental impact of AI prompts in Claude Code status line",
+  "main": "dist/index.js",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch",
+    "clean": "rm -rf dist"
+  },
+  "keywords": ["claude", "plugin", "environmental", "carbon", "tracking"],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0"
+  }
+}

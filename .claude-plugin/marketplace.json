@@ -1,0 +1,14 @@
+{
+  "name": "local-environmental-tracker",
+  "owner": {
+    "name": "Claude Code User"
+  },
+  "plugins": [
+    {
+      "name": "environmental-tracker",
+      "description": "Track environmental impact of AI prompts in status line",
+      "version": "1.0.0",
+      "source": "./"
+    }
+  ]
+}

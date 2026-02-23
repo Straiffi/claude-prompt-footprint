@@ -1,0 +1,27 @@
+{
+  "description": "Environmental impact tracking hooks",
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/home/juuso/code/claude-prompt-footprint/scripts/track-usage.sh",
+            "async": true
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "rm -f /tmp/claude-env-tracker-${session_id}.json",
+            "async": true
+          }
+        ]
+      }
+    ]
+  }
+}
