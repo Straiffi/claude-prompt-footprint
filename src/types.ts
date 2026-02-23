@@ -20,4 +20,5 @@ export type CumulativeImpact = {
   totalCo2: number;          // g
   totalWater: number;        // L
   promptCount: number;
+  seenThinkingTokens: number;  // cumulative thinking tokens counted so far (for delta calculation)
 };

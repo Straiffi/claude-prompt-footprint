@@ -17,5 +17,6 @@ export type CumulativeImpact = {
     totalCo2: number;
     totalWater: number;
     promptCount: number;
+    seenThinkingTokens: number;
 };
 //# sourceMappingURL=types.d.ts.map

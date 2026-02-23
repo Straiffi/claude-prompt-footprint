@@ -20,7 +20,8 @@ export const loadCumulativeData = (sessionId: string): CumulativeImpact => {
     totalElectricity: 0,
     totalCo2: 0,
     totalWater: 0,
-    promptCount: 0
+    promptCount: 0,
+    seenThinkingTokens: 0
   };
 };
 
@@ -32,16 +33,18 @@ export const saveCumulativeData = (sessionId: string, data: CumulativeImpact): v
 export const updateCumulativeData = (
   sessionId: string,
   impact: { electricity: number; co2: number; water: number },
-  tokens: number
+  tokens: number,
+  newSeenThinkingTokens: number
 ): CumulativeImpact => {
   const current = loadCumulativeData(sessionId);
-  
+
   const updated: CumulativeImpact = {
     totalTokens: current.totalTokens + tokens,
     totalElectricity: current.totalElectricity + impact.electricity,
     totalCo2: current.totalCo2 + impact.co2,
     totalWater: current.totalWater + impact.water,
-    promptCount: current.promptCount + 1
+    promptCount: current.promptCount + 1,
+    seenThinkingTokens: newSeenThinkingTokens
   };
   
   saveCumulativeData(sessionId, updated);

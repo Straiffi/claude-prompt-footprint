@@ -5,6 +5,6 @@ export declare const updateCumulativeData: (sessionId: string, impact: {
     electricity: number;
     co2: number;
     water: number;
-}, tokens: number) => CumulativeImpact;
+}, tokens: number, newSeenThinkingTokens: number) => CumulativeImpact;
 export declare const cleanupSession: (sessionId: string) => void;
 //# sourceMappingURL=storage.d.ts.map

@@ -16,21 +16,23 @@ export const loadCumulativeData = (sessionId) => {
         totalElectricity: 0,
         totalCo2: 0,
         totalWater: 0,
-        promptCount: 0
+        promptCount: 0,
+        seenThinkingTokens: 0
     };
 };
 export const saveCumulativeData = (sessionId, data) => {
     const filePath = `${STORAGE_FILE}-${sessionId}.json`;
     fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
 };
-export const updateCumulativeData = (sessionId, impact, tokens) => {
+export const updateCumulativeData = (sessionId, impact, tokens, newSeenThinkingTokens) => {
     const current = loadCumulativeData(sessionId);
     const updated = {
         totalTokens: current.totalTokens + tokens,
         totalElectricity: current.totalElectricity + impact.electricity,
         totalCo2: current.totalCo2 + impact.co2,
         totalWater: current.totalWater + impact.water,
-        promptCount: current.promptCount + 1
+        promptCount: current.promptCount + 1,
+        seenThinkingTokens: newSeenThinkingTokens
     };
     saveCumulativeData(sessionId, updated);
     return updated;
