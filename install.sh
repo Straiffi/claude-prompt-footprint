@@ -10,8 +10,13 @@ echo "Installing claude-prompt-footprint from: $DIR"
 
 # Patch hooks/hooks.json with the actual clone path.
 # Replaces whatever path currently precedes /scripts/track-usage.sh.
-sed -i'' "s|\"command\": \".*scripts/track-usage.sh\"|\"command\": \"$DIR/scripts/track-usage.sh\"|" \
-    "$DIR/hooks/hooks.json"
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    sed -i '' "s|\"command\": \".*scripts/track-usage.sh\"|\"command\": \"$DIR/scripts/track-usage.sh\"|" \
+        "$DIR/hooks/hooks.json"
+else
+    sed -i "s|\"command\": \".*scripts/track-usage.sh\"|\"command\": \"$DIR/scripts/track-usage.sh\"|" \
+        "$DIR/hooks/hooks.json"
+fi
 echo "  hooks/hooks.json patched"
 
 # Wire up the status line in ~/.claude/settings.json.
